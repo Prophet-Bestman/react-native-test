@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import {
+  Alert,
   Image,
+  Keyboard,
   Modal,
   Pressable,
   StyleSheet,
@@ -17,14 +19,21 @@ const Input = ({ goals, setGoals, visible, setVisible }) => {
   };
 
   const addGoalHandler = () => {
-    if (!!enteredText)
+    if (!!enteredText && enteredText?.length > 3) {
       setGoals([...goals, { text: enteredText, id: Math.random().toString() }]);
-    setEnteredText("");
-    setVisible(false);
+      setEnteredText("");
+      setVisible(false);
+    } else {
+      Alert.alert("Opps", "Goal must be at least 4 characters long", () => {});
+    }
   };
   return (
     <Modal visible={visible} animationType="slide">
-      <View style={styles.inputContainer}>
+      <Pressable
+        onPress={() => Keyboard.dismiss()}
+        style={styles.inputContainer}
+      >
+        {/* <View> */}
         <Image style={styles.img} source={require("../assets/imgs/goal.png")} />
         <TextInput
           style={styles.textInput}
@@ -44,7 +53,8 @@ const Input = ({ goals, setGoals, visible, setVisible }) => {
             <Text style={styles.btnText}>Add</Text>
           </Pressable>
         </View>
-      </View>
+        {/* </View> */}
+      </Pressable>
     </Modal>
   );
 };

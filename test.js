@@ -41,7 +41,7 @@ export default function Test() {
             The list of items entered goes here
           </Text>
           <FlatList
-            style={{ padding: 8 }}
+            style={{ paddingHorizontal: 12, flex: 1 }}
             alwaysBounceHorizontal={false}
             data={goals}
             renderItem={(itemData) => (
